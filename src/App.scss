@@ -31,8 +31,6 @@ $font-stack: Verdana, Geneva, Tahoma, sans-serif;
 
 body {
   font-family: $font-stack;
-  width: 100%;
-  height: 100vh;
   background-color: $primary-color;
   @include Centered;
 }
@@ -82,7 +80,7 @@ body {
   .previewerWrap {
     max-width: 800px;
     background-color: $secondary-color;
-    margin: 30px auto;
+    margin: 30px auto ;
     border: 1px solid $quaternary-color;
     display: flex;
     flex-direction: column;
@@ -115,6 +113,8 @@ body {
         background-color: #ffffff;
         color: #252627;
         font-weight: 600;
+        padding: 15px;
+        margin: 10px 0;
       }
 
       blockquote {
@@ -149,6 +149,30 @@ body {
 
       img {
         width: 100%;
+        margin: 15px 0;
+      }
+
+      h1 {
+        margin: 20px 0;
+      }
+
+      h2 {
+        margin: 18px 0;
+      }
+
+      h3 {
+        margin: 15px 0;
+      }
+      p {
+        margin: 10px 0;
+      }
+
+      ol {
+        margin: 10px 20px;
+      }
+
+      ul {
+        margin: 10px 20px;
       }
     }
   }

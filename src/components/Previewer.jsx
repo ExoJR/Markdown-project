@@ -1,14 +1,23 @@
-import { useState } from "react";
-import { marked } from "marked";
+import { useState,useEffect } from "react";
+import { marked, use } from "marked";
 import BtnExpAndMin from "./BtnExpAndMin";
+
+
 
 function Previewer({ text, onShowEditor }) {
   const [showEditor, setShowEditor] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
+
+  marked.use({
+    breaks:true,
+    gfm: true,
+  });
 
   const convertToHtml = (markdownText) => {
     const htmlText = marked.parse(markdownText);
     return { __html: htmlText };
   };
+
 
   const handleBtnClick = () => {
     if (!showEditor) {
@@ -19,6 +28,15 @@ function Previewer({ text, onShowEditor }) {
       onShowEditor(false);
     }
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
 
   return (
     <div className="previewerWrap">
@@ -31,13 +49,17 @@ function Previewer({ text, onShowEditor }) {
         <p>Previewer</p>
         <BtnExpAndMin onClick={handleBtnClick} isActive={showEditor} />
       </div>
-      <div
-        id="preview"
-        className="previewer"
-        dangerouslySetInnerHTML={convertToHtml(text)}
-        aria-label="previewer area"
-        title="previewer area"
-      />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div
+          id="preview"
+          className="previewer"
+          dangerouslySetInnerHTML={convertToHtml(text)}
+          aria-label="previewer area"
+          title="previewer area"
+        />
+      )}
     </div>
   );
 }
