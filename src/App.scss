@@ -11,6 +11,11 @@ $quaternary-color: #ffffff;
 $font-stack: Verdana, Geneva, Tahoma, sans-serif;
 
 @mixin responsive($breakpoint) {
+  @if $breakpoint == smartphone-portrait {
+    @media only screen and (max-width: 575.98px) {
+      @content;
+    }
+  }
   @if $breakpoint == smartphone-landscape {
     @media only screen and (max-width: 767.98px) {
       @content;
@@ -40,6 +45,10 @@ body {
   height: 100%;
   flex-direction: column;
 
+  @include responsive(smartphone-portrait) {
+    @include Centered;
+  }
+
   .editorWrap {
     max-width: 600px;
     background-color: $secondary-color;
@@ -48,6 +57,10 @@ body {
     display: flex;
     flex-direction: column;
     transition: max-width 1s ease-in-out;
+
+    @include responsive(smartphone-portrait) {
+      width: 300px;
+    }
 
     @include responsive(smartphone-landscape) {
       max-width: 400px;
@@ -87,6 +100,10 @@ body {
     font-size: 12px;
     transition: max-width, ease-in-out, 1s;
 
+    @include responsive(smartphone-portrait) {
+      width: 300px;
+    }
+
     @include responsive(smartphone-landscape) {
       max-width: 400px;
     }
@@ -107,6 +124,7 @@ body {
         background-color: #ffffff;
         color: #252627;
         font-weight: 600;
+
       }
 
       pre {
@@ -115,12 +133,20 @@ body {
         font-weight: 600;
         padding: 15px;
         margin: 10px 0;
+
+         code{
+          @include responsive(smartphone-portrait) {
+            display: flex;
+            width: 100%;
+            overflow: auto;
+          }
+         }
       }
 
       blockquote {
-        border-left: 3px solid rgb(32, 192, 32);
+        border-left: 3px solid rgb(22, 255, 22);
         padding-left: 5px;
-        color: rgb(32, 192, 32);
+        color: rgb(22, 255, 22);
         margin-left: 25px;
       }
 
@@ -130,13 +156,13 @@ body {
       }
 
       th {
-        border: 2px solid #479467;
+        border: 2px solid #5dd690;
         padding-left: 5px;
         padding-right: 5px;
       }
 
       td {
-        border: 2px solid #479467;
+        border: 2px solid #5dd690;
         padding-left: 5px;
         padding-right: 5px;
       }
@@ -188,6 +214,7 @@ body {
     color: $quaternary-color;
     border-bottom: 1px solid $quaternary-color;
     font-weight: 600;
+    font-size: 16px;
 
     i {
       font-size: 20px;
